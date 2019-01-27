@@ -1,0 +1,52 @@
+﻿<!--==========================
+  Header
+============================-->
+
+@{
+    string type = ViewBag.NavBarActive;
+    string navHome = "menu-active";
+    string navAnime = "";
+    string navManga = "";
+    string navSearch = "";
+    if (type == "Anime")
+    {
+        navAnime = "menu-active";
+        navHome = "";
+    }
+    else if(type == "Manga")
+    {
+        navManga = "menu-active";
+        navHome = "";
+    }
+    else if(type == "Search")
+    {
+        navSearch = "menu-active";
+        navHome = "";
+    }
+    else if(type == "Login")
+    {
+        navHome = navAnime = navManga = navSearch = "";
+
+    }
+}
+
+<header id="header">
+    <div class="container">
+
+        <div id="logo" class="pull-left">
+            <h1><a href="@Url.Action("Index","Home")">A<span>N</span>IME PO<span>R</span>TAL</a></h1>
+        </div>
+
+        <nav id="nav-menu-container">
+            <ul class="nav-menu">
+                <li class="@navHome"><a href="@Url.Action("Index","Home")">Home</a></li>
+                <li><a href="@Url.Action("Index","Home")#about">About</a></li>
+                <li class="@navAnime"><a href="@Url.Action("Index","Anime")">Anime</a></li>
+                <li class="@navManga"><a href="@Url.Action("Index","Manga")">Manga</a></li>
+                <li><a href="#footer">Contact</a></li>
+                <li class="@navSearch"><a href="@Url.Action("Index","Search")">Search</a></li>
+                <li class="buy-tickets"><a href="@Url.Action("Login","Home")">Login</a></li>
+            </ul>
+        </nav><!-- #nav-menu-container -->
+    </div>
+</header><!-- #header -->

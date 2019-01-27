@@ -1,0 +1,53 @@
+﻿@model IEnumerable<AnimePortalJikanAPI.JikanDecoder.Model.Secondary.MangaTopEntry>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    int pageNo = ViewBag.PageNumber;
+    int nextPageNo = pageNo + 1;
+    int prevPageNo = pageNo - 1;
+    string previousPage = "";
+    if (pageNo == 1)
+    {
+        previousPage = "disabled";
+    }
+}
+
+<section id="speakers" class="wow fadeInUp">
+    <div class="container">
+        <div class="section-header">
+            <h2>Popular Manga</h2>
+            <p>Here are the top Manga List</p>
+        </div>
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3">
+                    <div class="card mb-3 shadow-sm">
+                        <img class="bd-placeholder-img card-img-top img-fluid" src="@Html.DisplayFor(modelItem => item.ImageURL)" alt="@Html.DisplayFor(modelItem => item.Title)">
+                        <div class="card-body">
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Title)</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-outline-danger" href="@Url.Action("Details", "Manga", new { id = Html.DisplayFor(modelItem => item.MalId) })">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @previousPage">
+                <a class="page-link" href="@Url.Action("Index", "Manga", new { page = prevPageNo })"><span aria-hidden="true">&laquo;</span> Previous 50</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="@Url.Action("Index", "Manga", new { page = nextPageNo })">Next 50 <span aria-hidden="true">&raquo;</span></a>
+            </li>
+        </ul>
+    </nav>
+
+</section>
